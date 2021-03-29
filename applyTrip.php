@@ -156,12 +156,12 @@
         <th>Requirements</th>
         </tr>
         <?php
-        $conn = mysqli_connect("localhost", "root", "", "staff");
+        $conn = mysqli_connect("localhost", "root", "", "db_projectresq");
         // Check connection
         if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "SELECT id, username, password  FROM users";
+        $sql = "SELECT tripid, tripdate, description, location, minduration, numvolunteers, requirements FROM trip_details";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         // output data of each row
