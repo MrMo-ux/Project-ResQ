@@ -63,6 +63,22 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<style>
+		table {
+		border-collapse: collapse;
+		width: 100%;
+		color: #588c7e;
+		font-family: monospace;
+		font-size: 25px;
+		text-align: left;
+		}
+		th {
+		background-color: #588c7e;
+		color: white;
+		}
+		tr:nth-child(even) {background-color: #f2f2f2}
+    </style>
+
 	</head>
 	<body>
 		<div id="fh5co-wrapper">
@@ -105,7 +121,7 @@
 							<li>
 								<a href="#" class="fh5co-sub-ddown">Projects</a>
 								 <ul class="fh5co-sub-menu">
-								 	<li><a href="#">Apply for trips</a></li>
+								 	<li><a href="applyTrip.php">Apply for trips</a></li>
 								</ul>
 							</li>
 							<li><a href="about.html">About</a></li>
@@ -126,44 +142,34 @@
 				</div>
 			</div>
 
-			<div>
-				
-			</div>
-
-		</div>
-
-		<table class="responsive-table">
-			<caption>Status of your applied trips</caption>
-			<thead>
-			  <tr>
-				<th scope="col">Trip Date</th>
-				<th scope="col">Duration</th>
-				<th scope="col">Description</th>
-				<th scope="col">Requirement</th>
-				<th scope="col">Application Status</th>
-				<th scope="col">Remarks</th>
-			  </tr>
-			</thead>
-			<tfoot>
-			  
-			</tfoot>
-			<tbody>
-			  <tr>
-				<th scope="row">Hurricane relief</th>
-				<td data-title="Trip Date">10 March 2021</td>
-				<td data-title="Duration">24 hours</td>
-				<td data-title="Description" ></td>
-				<td data-title="Requirement" >Updated visa</td>
-				<td data-title="Application Status" >Approved</td>
-				<td data-title="Remarks">None</td>
-			  </tr>
-			  
-			</tbody>
-		  </table>
-
-		<div>
-
-		</div>
+			<table>
+				<tr>
+				<th>appid</th>
+				<th>name</th>
+				<th>appdate</th>
+				<th>status</th>
+				<th>remarks</th>
+				</tr>
+				<?php
+				$conn = mysqli_connect("localhost", "root", "", "db_projectresq");
+				// Check connection
+				if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+				}
+				$sql = "SELECT appid, name, appdate, status, remarks FROM application_details";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+				echo "<tr><td>" . $row["appid"]. "</td><td>" . $row["name"] . "</td><td>"
+				. $row["appdate"]. "</td><td>" . $row["status"] . "</td><td>" . $row["remarks"] . "</td></tr>";
+				}
+				echo "</table>";
+				} else { echo "0 results"; }
+				$conn->close();
+				?>
+			</table>
+		
 		
 		
 		
