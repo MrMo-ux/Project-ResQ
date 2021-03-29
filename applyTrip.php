@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -155,12 +156,12 @@
         <th>Requirements</th>
         </tr>
         <?php
-        $conn = mysqli_connect("localhost", "root", "", "db_projectresq");
+        $conn = mysqli_connect("localhost", "root", "", "staff");
         // Check connection
         if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "SELECT tripid, tripdate, description, location, minduration, numvolunteers, requirements FROM trip_details";
+        $sql = "SELECT id, username, password  FROM users";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         // output data of each row
@@ -174,23 +175,9 @@
         ?>
         </table>
 
-        <div class="login-form">
-         <form action="/examples/actions/confirmation.php" method="post">
-            <h2 class="text-center">Apply for a trip</h2>       
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Full name" required="required">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Trip ID" required="required">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Skills that you have">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Apply</button>
-            </div>        
-         </form>
-        </div>
+		<a href="applyTrip_form.php">Apply for trips</a> 
+
+        
 		
 		<footer>
 			<div id="footer">
